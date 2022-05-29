@@ -18,7 +18,7 @@ app.set("view engine", "hbs")
 app.set("views", "views")
 
 //connect folder with static files(image, css and other)
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname, "public")))
 
 app.use(express.urlencoded({
     extended: true
