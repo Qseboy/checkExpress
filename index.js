@@ -1,5 +1,6 @@
 const express = require("express")
 const path = require("path")
+const mongoose = require("mongoose")
 const exphbs = require("express-handlebars")
 const homeRoutes = require("./routes/home")
 const addRoutes = require("./routes/add")
@@ -30,8 +31,22 @@ app.use("/add", addRoutes)
 app.use("/courses", coursesRoutes)
 app.use("/card", cardRoutes)
 
-//dynamically set port for app 
-const PORT = process.env.PORT || 3000; 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
+
+//Start app, connect to bd mongo
+async function start() {
+    try {
+        const url = "mongodb+srv://qseboy:883ixlGt74X2w9kz@cluster0.ahlfkj9.mongodb.net/?retryWrites=true&w=majority"
+        await mongoose.connect(url, {useNewUrlParser: true})
+    
+        //dynamically set port for app 
+        const PORT = process.env.PORT || 3000; 
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`)
+        })
+    } catch(e) {
+        console.log(e)
+    }
+}
+start()
+
+
