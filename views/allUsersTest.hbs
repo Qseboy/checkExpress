@@ -1,0 +1,20 @@
+<h1>{{title}}</h1>
+
+{{#if users}}
+{{#each users}}
+<ul class="collection">
+    <li class="collection-item">Name - {{name}}</li>
+    <li class="collection-item">Last name - {{lastName}}</li>
+    <li class="collection-item">Email - {{email}}</li>
+    <li class="collection-item">Phone - {{phone}}</li>
+    <form method="POST">
+        <input type="hidden" name="id" value="{{id}}">
+        <button class="btn red">Удалить</button>
+    </form>
+</ul>
+
+<br>
+{{/each}}
+{{else}}
+<p>Пользователей нет</p>
+{{/if}}

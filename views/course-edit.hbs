@@ -1,5 +1,5 @@
-<h1>Редактировать {{title}}</h1>
-<form action="/courses/edit" method="post">
+<h1>{{title}}</h1>
+<form action="/courses/edit" method="post" class="course-form">
     <div class="input-field">
           <input id="title" name="title" type="text" class="validate" value="{{course.title}}" required>
           <label for="title">Название курса</label>
@@ -19,5 +19,13 @@
     </div>
 
     <input type="hidden" name="id" value="{{course.id}}">
-    <button class="btn btn-primary">Редактировать курс</button>
+    <button type="submit" class="btn btn-primary">Редактировать курс</button>
+
+</form>
+
+{{!-- С методом Post отправляется объект с name:value, который лежит в req.body --}}
+<form action="/courses/remove" method="POST">
+{{!-- Нужен для того чтобы передавать в req.body.id текущий id курса который надо удалить --}}
+      <input type="hidden" name="id" value="{{course.id}}"> 
+      <button class="btn red">Удалить курс</button>
 </form>

@@ -1,6 +1,6 @@
 const {Schema, model} = require("mongoose")
 
-const users = new Schema({
+const usersTest = new Schema({
     name: {
         type: String,
         required: true // если поле обязательное для заполнения
@@ -24,4 +24,4 @@ const users = new Schema({
     }
 })
 
-module.exports = model("Users", users)
+module.exports = model("UsersTest", usersTest)

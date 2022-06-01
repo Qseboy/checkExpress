@@ -8,7 +8,7 @@ const homeRoutes = require("./routes/home")
 const addRoutes = require("./routes/add")
 const coursesRoutes = require("./routes/courses")
 const cardRoutes = require("./routes/card")
-const usersRoutes = require("./routes/users")
+const usersRoutes = require("./routes/usersTest")
 const app = express()
 
 //connect hbs - handlebars
