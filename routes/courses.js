@@ -3,7 +3,10 @@ const Course = require("../models/course")
 const router = Router()
 
 router.get("/", async (req, res) => {
-    const courses = await Course.find(); //забирает все курсы с бд
+    const courses = await Course.find() //забирает все курсы с бд
+        .populate("userId", "email name")
+        .select("price title image"); //выбор полей которые показывать
+
     res.render("courses", {
         title: "Курсы",
         isCourses: true,

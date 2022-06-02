@@ -3,12 +3,15 @@ const path = require("path")
 const mongoose = require("mongoose")
 const exphbs = require("express-handlebars")
 const Handlebars = require('handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const {
+    allowInsecurePrototypeAccess
+} = require('@handlebars/allow-prototype-access')
 const homeRoutes = require("./routes/home")
 const addRoutes = require("./routes/add")
 const coursesRoutes = require("./routes/courses")
 const cardRoutes = require("./routes/card")
 const usersRoutes = require("./routes/usersTest")
+const User = require("./models/user")
 const app = express()
 
 //connect hbs - handlebars
@@ -21,6 +24,18 @@ const hbs = exphbs.create({
 app.engine("hbs", hbs.engine)
 app.set("view engine", "hbs")
 app.set("views", "views")
+
+
+//middleware для работы с юзером
+app.use(async (req, res, next) => {
+    try {
+        const user = await User.findById("629894f5f5c9e492f4454d38")
+        req.user = user
+        next()
+    } catch(e) {
+        console.log(e)
+    }
+})
 
 //connect folder with static files(image, css and other)
 app.use(express.static(path.join(__dirname, "public")))
@@ -42,16 +57,25 @@ async function start() {
     try {
         const url = "mongodb+srv://qseboy:883ixlGt74X2w9kz@cluster0.ahlfkj9.mongodb.net/shop"
         await mongoose.connect(url, {useNewUrlParser: true})
-    
+
+        const candidate = await User.findOne()
+        if(!candidate) {
+            const user = new User({
+                email: "qseboy1998@gmail.com",
+                name: "qseboy",
+                cart: {items:[]}
+            })
+            await user.save()
+        }
+
+
         //dynamically set port for app 
-        const PORT = process.env.PORT || 3000; 
+        const PORT = process.env.PORT || 3000;
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`)
         })
-    } catch(e) {
+    } catch (e) {
         console.log(e)
     }
 }
 start()
-
-
