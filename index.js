@@ -29,7 +29,7 @@ app.set("views", "views")
 //middleware для работы с юзером
 app.use(async (req, res, next) => {
     try {
-        const user = await User.findById("629894f5f5c9e492f4454d38")
+        const user = await User.findById("629a091e8934d0fd08adf62d")   // Статичный юзер с id 
         req.user = user
         next()
     } catch(e) {
