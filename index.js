@@ -11,7 +11,7 @@ const addRoutes = require("./routes/add")
 const coursesRoutes = require("./routes/courses")
 const cardRoutes = require("./routes/card")
 const ordersRoutes = require("./routes/orders")
-const usersRoutes = require("./routes/usersTest")
+const authRoutes = require("./routes/auth")
 const User = require("./models/user")
 const app = express()
 
@@ -51,7 +51,7 @@ app.use("/add", addRoutes)
 app.use("/courses", coursesRoutes)
 app.use("/card", cardRoutes)
 app.use("/orders", ordersRoutes)
-app.use("/singup", usersRoutes)
+app.use("/auth", authRoutes)
 
 
 //Start app, connect to bd mongo

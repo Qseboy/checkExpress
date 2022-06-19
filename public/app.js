@@ -58,3 +58,6 @@ if ($card) {
         }
     })
 }
+
+//Initialization tabs
+M.Tabs.init(document.querySelectorAll(".tabs"));
